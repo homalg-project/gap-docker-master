@@ -1,0 +1,43 @@
+# Source: https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
+
+name: Create and publish a Docker image
+on:
+  push:
+    branches:
+      - "master"
+  schedule:
+    - cron: "0 2 * * *" # later than gap-docker-base
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+      packages: write
+
+    steps:
+      # keep workflow active even if repository has no activity for 60 days
+      - run: 'curl --fail -X PUT -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/actions/workflows/Publish.yml/enable'
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: "ghcr.io/${{ github.repository }}:latest"

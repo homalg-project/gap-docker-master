@@ -1,4 +1,4 @@
-FROM gapsystem/gap-docker-base
+FROM ghcr.io/homalg-project/gap-docker-base:latest
 
 MAINTAINER The GAP Group <support@gap-system.org>
 
