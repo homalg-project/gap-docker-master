@@ -15,11 +15,11 @@ RUN    mkdir /home/gap/inst/ \
     && cp bin/gap.sh bin/gap
 
 # download and build GAP packages
-# remove NormalizInterface to save >1GB of disk space
 RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && curl --location https://files.gap-system.org/gap4pkgs/packages-${GAP_BRANCH}.tar.gz | tar xz \
-    && rm -R NormalizInterface* \
+    && rm -f NormalizInterface*/build-normaliz.sh \
+    && rm -f NormalizInterface*/prerequisites.sh \
     && ../bin/BuildPackages.sh
 
 ## build JupyterKernel
