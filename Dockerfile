@@ -18,8 +18,7 @@ RUN    mkdir /home/gap/inst/ \
 # remove NormalizInterface to save >1GB of disk space
 RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
-    && wget -q https://files.gap-system.org/gap4pkgs/packages-${GAP_BRANCH}.tar.gz \
-    && tar xzf packages-${GAP_BRANCH}.tar.gz \
+    && curl --location https://files.gap-system.org/gap4pkgs/packages-${GAP_BRANCH}.tar.gz | tar xz \
     && rm -R NormalizInterface* \
     && ../bin/BuildPackages.sh
 
