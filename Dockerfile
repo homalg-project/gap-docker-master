@@ -5,7 +5,7 @@ MAINTAINER The GAP Group <support@gap-system.org>
 ENV GAP_BRANCH=master
 
 # download and build GAP
-RUN    mkdir /home/gap/inst/ \
+RUN    mkdir -p /home/gap/inst/ \
     && cd /home/gap/inst/ \
     && git clone --depth=1 -b ${GAP_BRANCH} https://github.com/gap-system/gap gap-${GAP_BRANCH} \
     && cd gap-${GAP_BRANCH} \
