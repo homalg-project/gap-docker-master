@@ -1,7 +1,5 @@
 FROM ghcr.io/homalg-project/gap-docker-base:latest
 
-MAINTAINER The GAP Group <support@gap-system.org>
-
 ENV GAP_BRANCH=master
 
 # download and build GAP
