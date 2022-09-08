@@ -16,10 +16,6 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: read
-      packages: write
 
     steps:
       # keep workflow active even if repository has no activity for 60 days
