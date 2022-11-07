@@ -13,9 +13,10 @@ RUN    mkdir -p /home/gap/inst/ \
     && cp bin/gap.sh bin/gap
 
 # download and build GAP packages
-RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
-    && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
-    && curl --location https://github.com/gap-system/PackageDistro/releases/download/latest/packages.tar.gz | tar xz \
+RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/ \
+    && make bootstrap-pkg-full \
+    && rm packages.tar.gz \
+    && cd pkg/ \
     && rm normalizinterface/prerequisites.sh \
     && ../bin/BuildPackages.sh
 
