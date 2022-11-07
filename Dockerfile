@@ -16,7 +16,7 @@ RUN    mkdir -p /home/gap/inst/ \
 RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && curl --location https://github.com/gap-system/PackageDistro/releases/download/latest/packages.tar.gz | tar xz \
-    && rm normalizinterface/build-normaliz.sh \
+    && rm normalizinterface/prerequisites.sh \
     && ../bin/BuildPackages.sh
 
 ## build JupyterKernel
