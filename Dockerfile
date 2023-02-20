@@ -18,7 +18,9 @@ RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/ \
     && rm packages.tar.gz \
     && cd pkg/ \
     && rm normalizinterface/prerequisites.sh \
-    && ../bin/BuildPackages.sh
+    && ../bin/BuildPackages.sh \
+    && cd .. \
+    && make doc
 
 ## build JupyterKernel
 #RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
