@@ -22,6 +22,12 @@ RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/ \
     && cd .. \
     && make doc
 
+# Remove StandardFF:
+# We do not need it but it causes various issues,
+# see https://github.com/gap-system/PackageDistro/pull/821
+# and https://github.com/frankluebeck/StandardFF/pull/6
+RUN rm -R /home/gap/inst/gap-${GAP_BRANCH}/pkg/standardff
+
 ## build JupyterKernel
 #RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
 #    && mv JupyterKernel-* JupyterKernel \
