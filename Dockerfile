@@ -12,11 +12,17 @@ RUN    mkdir -p /home/gap/inst/ \
     && make
 
 # download and build GAP packages
+
+# NormalizInterface: switch to C++14 to work around https://github.com/gap-packages/NormalizInterface/issues/110
+
 RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/ \
     && make bootstrap-pkg-full \
     && rm packages.tar.gz \
     && cd pkg/ \
     && rm normalizinterface/prerequisites.sh \
+    && sed -i 's/AX_CXX_COMPILE_STDCXX(11, ,mandatory)/AX_CXX_COMPILE_STDCXX(14, ,mandatory)/' normalizinterface/configure.ac \
+    && sed -i 's/-std=gnu++11/-std=gnu++14/' normalizinterface/Makefile.in \
+    && (cd normalizinterface && ./autogen.sh) \
     && ../bin/BuildPackages.sh \
     && cd .. \
     && make doc
