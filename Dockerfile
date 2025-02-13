@@ -27,6 +27,10 @@ RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/ \
     && cd .. \
     && make doc
 
+## workaround for until new digraphs version is released
+RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/ \
+    && touch pkg/digraphs/gap/doc.g
+
 ## build JupyterKernel
 #RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
 #    && mv JupyterKernel-* JupyterKernel \
